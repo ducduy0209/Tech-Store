@@ -35,7 +35,11 @@ const renderProducts = () => {
     const addCart = $$('.add-cart');
     for (let i = 0; i < addCart.length; i++) {
         addCart[i].addEventListener('click', () => {
-            addToCart(listProducts[i]);
+            if (listProducts[i].quantity) {
+                addToCart(listProducts[i]);
+            } else {
+                alert("Sản phẩm này đã hết hàng, quý khách thông cảm!");
+            }
         })
     }
 }
@@ -59,8 +63,8 @@ const renderAndHandleQuickView = (product) => {
         status = 'còn hàng';
     }
     const htmls = `
-    <img class="col l-6 m-12 c-12" src="${product.img}" alt="">
-    <div class="content-info col l-6 m-12 c-12">
+    <img class="col l-6 m-6 c-12" src="${product.img}" alt="">
+    <div class="content-info col l-6 m-6 c-12">
         <h1>${product.name}</h1>
         <i class="fas fa-times close-btn"></i>
         <div class="price">
